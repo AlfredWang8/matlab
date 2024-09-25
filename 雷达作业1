@@ -1,0 +1,40 @@
+clc;
+clear;
+close all;
+
+% 定义常量
+c = 3e8;  % 光速，单位 m/s
+
+%% (a) 多普勒频率与径向速度之间的关系
+f0_values = [35e9, 10e9, 3e9, 450e6, 150e6];  % 载波频率，单位 Hz
+v = linspace(0, 1000, 1000);  % 径向速度范围，单位 m/s
+
+figure;
+hold on;
+for i = 1:length(f0_values)
+    f0 = f0_values(i);
+    fd = v .* f0 / c;  % 多普勒频率
+    plot(v, fd, 'DisplayName', ['f_0 = ' num2str(f0/1e9) ' GHz']);
+end
+xlabel('径向速度 (m/s)');
+ylabel('多普勒频率 (Hz)');
+title('多普勒频率-径向速度');
+legend show;
+grid on;
+
+%% (b) 多普勒频率与波长之间的关系
+v_values = [10, 100, 1000];  % 径向速度，单位 m/s
+lambda = linspace(0.01, 10, 1000);  % 波长范围，单位 m
+
+figure;
+hold on;
+for i = 1:length(v_values)
+    v = v_values(i);
+    fd = v ./ lambda;  % 多普勒频率
+    plot(lambda, fd, 'DisplayName', ['v = ' num2str(v) ' m/s']);
+end
+xlabel('波长 (m)');
+ylabel('多普勒频率 (Hz)');
+title('多普勒频率-波长');
+legend show;
+grid on;
